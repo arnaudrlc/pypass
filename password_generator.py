@@ -63,4 +63,6 @@ def password_generator(size: int = 12) -> str:
 
 
 if __name__ == "__main__":
-    print(password_generator())
+    _ = password_generator()
+    if _:
+        print(_)
