@@ -25,7 +25,7 @@ def get_ratios(size: int) -> Tuple[int, int, int]:
         Tuple[int, int, int]: Ratios.
     """
     letters = int(size / 2)
-    schar = digits = int(letters / 2) if letters % 2 == 0 else 1
+    schar = digits = int(letters / 4) if letters % 2 == 0 else 1
     return letters, digits, schar
 
 

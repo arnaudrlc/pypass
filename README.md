@@ -1,2 +1,2 @@
 # pypass
-Complex password generator in Python 3.10.
+Complex password generator in CPython 3.10.
