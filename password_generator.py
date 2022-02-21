@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Complex passworf generator using CPython 3.10.
+Complex password generator using CPython 3.10.
 Author: Arnaud Ralec
 """
 
