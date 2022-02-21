@@ -15,6 +15,10 @@ from typing import Tuple
 SPECIAL_CHARACTERS = ("@", "#", "_", "-", "!", "?", "&")
 
 
+class PasswordSizeError(Exception):
+    pass
+
+
 def get_ratios(size: int) -> Tuple[int, int, int]:
     """Sets a ratio of letters, digits and special caracters.
 
@@ -25,7 +29,7 @@ def get_ratios(size: int) -> Tuple[int, int, int]:
         Tuple[int, int, int]: Ratios.
     """
     letters = int(size / 2)
-    schar = digits = int(letters / 4) if letters % 2 == 0 else 1
+    schar = digits = int(letters / 4)
     return letters, digits, schar
 
 
@@ -36,15 +40,26 @@ def password_generator(size: int = 12) -> str:
     Args:
         size (int, optional): Desired size of the password. Defaults to 10.
 
+    Raises:
+        PasswordSizeError: Error occuring when the selected size for
+        the password is too short. A valid password must be at least 8
+        characters long.
+
     Returns:
-        str: _description_
+        str: Generated password
     """
-    letters, integers, scharacters = get_ratios(size)
-    pwd = [random.choice(string.ascii_uppercase) for _ in range(letters)]
-    pwd += [random.choice(string.digits) for _ in range(integers)]
-    pwd += [random.choice(SPECIAL_CHARACTERS) for _ in range(scharacters)]
-    random.shuffle(pwd)
-    return "".join(pwd).lower()
+    try:
+        if size >= 8:
+            letters, integers, scharacters = get_ratios(size)
+            pwd = [random.choice(string.ascii_uppercase) for _ in range(letters)]
+            pwd += [random.choice(string.digits) for _ in range(integers)]
+            pwd += [random.choice(SPECIAL_CHARACTERS) for _ in range(scharacters)]
+            random.shuffle(pwd)
+            return "".join(pwd).lower()
+        else:
+            raise PasswordSizeError
+    except PasswordSizeError:
+        print("A valid password must contain at least 8 characters.")
 
 
 if __name__ == "__main__":
