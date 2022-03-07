@@ -6,11 +6,9 @@ Complex password generator using CPython 3.10.
 Author: Arnaud Ralec
 """
 
-import string
 import random
-
+import string
 from typing import Tuple
-
 
 SPECIAL_CHARACTERS = ("@", "#", "_", "-", "!", "?", "&")
 
