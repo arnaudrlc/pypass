@@ -27,8 +27,8 @@ def get_ratios(size: int) -> Tuple[int, int, int]:
         Tuple[int, int, int]: Ratios.
     """
     letters = int(size / 2)
-    schar = digits = int(letters / 4)
-    return letters, digits, schar
+    schars = digits = int(letters / 2)
+    return letters, digits, schars
 
 
 def password_generator(size: int = 12) -> str:
@@ -50,10 +50,12 @@ def password_generator(size: int = 12) -> str:
         if size >= 8:
             letters, integers, scharacters = get_ratios(size)
             pwd = [random.choice(string.ascii_uppercase) for _ in range(letters)]
+            for i in range(0, random.randint(0, len(pwd))):
+                pwd[i] = pwd[i].lower()
             pwd += [random.choice(string.digits) for _ in range(integers)]
             pwd += [random.choice(SPECIAL_CHARACTERS) for _ in range(scharacters)]
             random.shuffle(pwd)
-            return "".join(pwd).lower()
+            return "".join(pwd)
         else:
             raise PasswordSizeError
     except PasswordSizeError:
