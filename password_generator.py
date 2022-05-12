@@ -26,8 +26,8 @@ def get_ratios(size: int) -> Tuple[int, int, int]:
     Returns:
         Tuple[int, int, int]: Ratios.
     """
-    letters = int(size / 2)
-    schars = digits = int(letters / 2)
+    letters = size // 2
+    schars = digits = letters // 2
     return letters, digits, schars
 
 
@@ -47,22 +47,25 @@ def password_generator(size: int = 12) -> str:
         str: Generated password
     """
     try:
-        if size >= 8:
-            letters, integers, scharacters = get_ratios(size)
-            pwd = [random.choice(string.ascii_uppercase) for _ in range(letters)]
-            for i in range(0, random.randint(0, len(pwd))):
-                pwd[i] = pwd[i].lower()
-            pwd += [random.choice(string.digits) for _ in range(integers)]
-            pwd += [random.choice(SPECIAL_CHARACTERS) for _ in range(scharacters)]
-            random.shuffle(pwd)
-            return "".join(pwd)
-        else:
+        if size < 8:
             raise PasswordSizeError
+        letters, integers, scharacters = get_ratios(size)
+        pwd = [random.choice(string.ascii_uppercase) for _ in range(letters)]
+        for i in range(random.randint(0, len(pwd))):
+            pwd[i] = pwd[i].lower()
+        pwd += [random.choice(string.digits) for _ in range(integers)]
+        pwd += [random.choice(SPECIAL_CHARACTERS) for _ in range(scharacters)]
+        random.shuffle(pwd)
+        return "".join(pwd)
+
     except PasswordSizeError:
         print("A valid password must contain at least 8 characters.")
 
 
-if __name__ == "__main__":
-    _ = password_generator()
-    if _:
+def main():
+    if _ := password_generator():
         print(_)
+
+
+if __name__ == "__main__":
+    main()
