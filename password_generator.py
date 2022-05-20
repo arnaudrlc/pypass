@@ -62,10 +62,10 @@ def password_generator(size: int = 12) -> str:
         print("A valid password must contain at least 8 characters.")
 
 
-def main():
+def _main():
     if _ := password_generator():
         print(_)
 
 
 if __name__ == "__main__":
-    main()
+    _main()
