@@ -17,14 +17,14 @@ class PasswordSizeError(Exception):
     pass
 
 
-def get_ratios(size: int) -> Tuple[int, int, int]:
+def get_ratios(size: int) -> Tuple:
     """Sets a ratio of letters, digits and special caracters.
 
     Args:
         size (int): Size of the password.
 
     Returns:
-        Tuple[int, int, int]: Ratios.
+        Tuple: Ratios.
     """
     letters = size // 2
     schars = digits = letters // 2
